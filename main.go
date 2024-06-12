@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"runtime"
 )
 
 var port = os.Getenv("PORT")
@@ -19,8 +20,8 @@ func main() {
 func HelloServer(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path[1:]
 	if path != "" {
-		fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
+		fmt.Fprintf(w, "Hello, %s!. I'm running on %s architecture", r.URL.Path[1:], runtime.GOARCH)
 	} else {
-		fmt.Fprint(w, "Hello World!")
+		fmt.Fprintf(w, "Hello World! I'm running on %s architecture", runtime.GOARCH)
 	}
 }
